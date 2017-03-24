@@ -1,0 +1,36 @@
+extends layout
+
+block style
+    style.
+        .xmlArea{
+            width: 100%;
+            height: 400px;
+        }
+
+block content
+    form(action="/api/xmlparse" method="post" class="xmlForm")
+        textarea(class="xmlArea" name="xmlBody" col=10 row=8)
+        div
+            input(class="xmlPath" name="xmlPath")
+        div
+            button(class="xmlSubmit" type="submit") 提交
+            a(class="xmldl" href="/api/xmlDownload") 下载
+    div.xmlInfoArea
+
+block customScript
+    script.
+        var $form = $('.xmlForm');
+        var $info = $('.xmlInfoArea');
+        $form.on('submit', function (e) {
+            e.preventDefault();
+            $.ajax({
+                url: '/api/xmlparse',
+                type: 'post',
+                data: $form.serialize()
+            }).done(function (d) {
+                if (d.data) {
+                    $info.text(d.data);
+                }
+            });
+        });
+
