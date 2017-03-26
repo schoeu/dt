@@ -8,7 +8,7 @@ var xmlDownload = require('./xmlDownload');
 var fileName = '';
 
 function xmlRender(req, res, next) {
-    res.render('xml', { title: '' });
+    res.render('xml', {title: ''});
 }
 
 function xmlProcess(req, res, next) {
