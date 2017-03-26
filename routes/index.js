@@ -16,11 +16,12 @@ router.get('/xmlparse', xmlRouter.xmlRender.bind(this));
 router.post('/api/xmlparse', xmlRouter.xmlProcess.bind(this));
 
 // XML解析接口
-router.get('/api/xmlDownload', xmlRouter.xmlDown.bind(this));
+router.get('/api/xmldownload', xmlRouter.xmlDown.bind(this));
 
-// 图片&裁剪路由
+// 图片路由
 router.get('/imgs', imgsRouter.imgsRender.bind(this));
 
-
+// 获取图片
+router.post('/api/getimgs', imgsRouter.getImgs.bind(this));
 
 module.exports = router;
