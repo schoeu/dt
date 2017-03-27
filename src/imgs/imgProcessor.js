@@ -4,8 +4,9 @@
 
 var sharp = require('sharp');
 
-function imgsPro(w, h, q) {
-
+function imgsPro(path, options) {
+    sharp(path)
+        .resize(options.w, options.h)
 }
 
 module.exports = {

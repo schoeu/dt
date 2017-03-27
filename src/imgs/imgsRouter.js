@@ -4,6 +4,7 @@
 
 var path = require('path');
 
+var imgProcessor = require('./imgProcessor');
 
 var filed = require('node-filed');
 var xmlPro = require('xmlpro');
@@ -15,6 +16,8 @@ function imgsRender(req, res, next) {
 function getImgs(req, res, next) {
     var imgsStr = req.body.imgsBody || '';
     var imgsPath = req.body.imgsPath.trim() || '';
+    var imgsSize = req.body.imgsSize.trim() || '10000, 10000';
+    var imgsQ = req.body.imgsQ.trim() || 100;
     xmlPro.getDatas(imgsStr, imgsPath, function (err, rs) {
         if (err) {
             return;
@@ -25,11 +28,19 @@ function getImgs(req, res, next) {
             });
 
             filed.on('data', function (err, d) {
-                //res.json(d || {});
             });
 
             filed.on('end', function (data) {
                 res.end('下载完成.');
+                var size = imgsSize.split(',');
+                if (size.length > 1) {
+                    size[1] = size[0];
+                }
+                imgProcessor.imgsPro(data.filename, {
+                    w: size[0],
+                    h: size[1],
+                    q: imgsQ
+                });
             });
 
             filed.download({
