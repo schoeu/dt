@@ -9,6 +9,13 @@ var EventEmitter = require('events').EventEmitter;
 
 var event = new EventEmitter();
 
+/**
+ * 图片数据处理&裁剪&压缩
+ *
+ * @param {Array} data 图片信息数组
+ * @param {string} tPath 图片存储目录
+ * @param {Object} options 图片处理参数
+ * */
 function imgsPro(data, tPath, options) {
     data = data || [];
     if (data && !Array.isArray(data)) {
@@ -50,6 +57,5 @@ function imgsPro(data, tPath, options) {
 }
 
 event.imgsPro = imgsPro;
-
 
 module.exports = event;
