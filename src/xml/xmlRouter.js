@@ -7,11 +7,23 @@ var xmlDownload = require('./xmlDownload');
 
 var fileName = '';
 
-function xmlRender(req, res, next) {
+/**
+ * xml页面渲染
+ *
+ * @param {Object} req 请求对象
+ * @return {Object} res 响应对象
+ * */
+function xmlRender(req, res) {
     res.render('xml', {title: ''});
 }
 
-function xmlProcess(req, res, next) {
+/**
+ * xml数据处理
+ *
+ * @param {Object} req 请求对象
+ * @return {Object} res 响应对象
+ * */
+function xmlProcess(req, res) {
     var xmlStr = req.body.xmlBody || '';
     var xmlPath = req.body.xmlPath.trim() || '';
 
@@ -43,12 +55,19 @@ function xmlProcess(req, res, next) {
     });
 }
 
-function xmlDown(req, res, next) {
+/**
+ * xml处理后数据下载
+ *
+ * @param {Object} req 请求对象
+ * @return {Object} res 响应对象
+ * */
+function xmlDown(req, res) {
     if (fileName) {
         res.download(fileName);
     }
 }
 
+// 导出功能方法
 module.exports = {
     xmlRender: xmlRender,
     xmlProcess: xmlProcess,
