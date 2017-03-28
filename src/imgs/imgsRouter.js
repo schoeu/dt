@@ -9,6 +9,8 @@ var imgProcessor = require('./imgProcessor');
 var filed = require('node-filed');
 var xmlPro = require('xmlpro');
 
+var tempDirName = '__cache';
+
 function imgsRender(req, res, next) {
     res.render('imgs', {title: ''});
 }
@@ -18,8 +20,10 @@ function getImgs(req, res, next) {
     var imgsPath = req.body.imgsPath.trim() || '';
     var imgsSize = req.body.imgsSize.trim() || '10000, 10000';
     var imgsQ = req.body.imgsQ;
+    var tFilePath = path.join(__dirname, '../../', tempDirName);
     imgsQ = imgsQ.trim() || 100;
     xmlPro.getDatas(imgsStr, imgsPath, function (err, rs) {
+
         if (err) {
             return;
         }
@@ -37,7 +41,7 @@ function getImgs(req, res, next) {
                 if (size.length === 1) {
                     size[1] = size[0];
                 }
-                imgProcessor.imgsPro(data, {
+                imgProcessor.imgsPro(data, tFilePath, {
                     w: size[0],
                     h: size[1],
                     q: imgsQ
@@ -46,7 +50,7 @@ function getImgs(req, res, next) {
 
             filed.download({
                 srcs: rs,
-                path: path.join(__dirname, '../../__cache')
+                path: tFilePath
             });
         }
     });
