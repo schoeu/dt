@@ -32,15 +32,18 @@ function getImgs(req, res, next) {
                 return i.toString();
             });
 
-            filed.on('data', function (err, d) {
-            });
-
             filed.on('end', function (data) {
-                res.end('下载完成.');
                 var size = imgsSize.split(',');
                 if (size.length === 1) {
                     size[1] = size[0];
                 }
+
+                imgProcessor.on('end', function (d) {
+                    res.json({
+                        status: 0,
+                        path: d
+                    });
+                });
                 imgProcessor.imgsPro(data, tFilePath, {
                     w: size[0],
                     h: size[1],
@@ -56,7 +59,19 @@ function getImgs(req, res, next) {
     });
 }
 
+function downloadImgs (req, res) {
+    var filename = req.params && req.params.filename;
+    var filePath = path.join(__dirname, '../..', '__dist/' + filename);
+    if (filename) {
+        res.download(filePath)
+    }
+    else {
+        res.end();
+    }
+}
+
 module.exports = {
     imgsRender: imgsRender,
-    getImgs: getImgs
+    getImgs: getImgs,
+    downloadImgs: downloadImgs
 };

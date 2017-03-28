@@ -33,7 +33,7 @@ block customScript
                 type: 'post',
                 data: $form.serialize()
             }).done(function (d) {
-                $info.text(d);
+                !d.status && $info.append('<a href="api/download/' + d.path + '">下载打包文件</a>');
             });
         });
 

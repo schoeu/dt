@@ -7,10 +7,9 @@ var path = require('path');
 var childProcess = require('child_process');
 var EventEmitter = require('events').EventEmitter;
 
+var event = new EventEmitter();
 
 function imgsPro(data, tPath, options) {
-    var event = new EventEmitter();
-
     data = data || [];
     if (data && !Array.isArray(data)) {
         data = [data];
@@ -26,7 +25,7 @@ function imgsPro(data, tPath, options) {
         sharp(filename)
             .resize(parseInt(w, 10), parseInt(h, 10))
             .quality(parseInt(q, 10))
-            .toFile(filename.replace(extname, '_pro' + extname), function(err, info) {
+            .toFile(filename.replace(extname, '_pro' + extname), function() {
                 event.emit('done');
             });
     }
@@ -36,19 +35,21 @@ function imgsPro(data, tPath, options) {
      * */
     event.on('done', function () {
         if (!--length) {
-            childProcess.exec('zip -r ../__dist/' + Date.now() + '.zip ./*', {
+            var d = new Date();
+            var name = d.getHours() + '_' + d.getMinutes() + '_' + d.getSeconds() +'.zip';
+            childProcess.exec('zip -r ../__dist/' + name + ' ./*', {
                 cwd: tPath
             }, function (err, result) {
                 if (err) {
                     throw err;
                 }
+                event.emit('end', name);
             });
         }
     });
 }
 
+event.imgsPro = imgsPro;
 
 
-module.exports = {
-    imgsPro: imgsPro
-};
+module.exports = event;

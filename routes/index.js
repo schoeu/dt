@@ -3,7 +3,6 @@ var router = express.Router();
 var xmlRouter = require('../src/xml/xmlRouter');
 var imgsRouter = require('../src/imgs/imgsRouter');
 
-
 /* GET home page. */
 router.get('/', function (req, res, next) {
     res.render('index', {title: 'Express'});
@@ -23,5 +22,8 @@ router.get('/imgs', imgsRouter.imgsRender.bind(this));
 
 // 获取图片
 router.post('/api/getimgs', imgsRouter.getImgs.bind(this));
+
+// 下载图片
+router.get('/api/download/:filename', imgsRouter.downloadImgs.bind(this));
 
 module.exports = router;
