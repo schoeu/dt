@@ -17,7 +17,8 @@ function getImgs(req, res, next) {
     var imgsStr = req.body.imgsBody || '';
     var imgsPath = req.body.imgsPath.trim() || '';
     var imgsSize = req.body.imgsSize.trim() || '10000, 10000';
-    var imgsQ = req.body.imgsQ.trim() || 100;
+    var imgsQ = req.body.imgsQ;
+    imgsQ = imgsQ.trim() || 100;
     xmlPro.getDatas(imgsStr, imgsPath, function (err, rs) {
         if (err) {
             return;
@@ -33,10 +34,10 @@ function getImgs(req, res, next) {
             filed.on('end', function (data) {
                 res.end('下载完成.');
                 var size = imgsSize.split(',');
-                if (size.length > 1) {
+                if (size.length === 1) {
                     size[1] = size[0];
                 }
-                imgProcessor.imgsPro(data.filename, {
+                imgProcessor.imgsPro(data, {
                     w: size[0],
                     h: size[1],
                     q: imgsQ
