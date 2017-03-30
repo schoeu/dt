@@ -2,9 +2,22 @@ doctype html
 html
   head
     title= title
+    meta(charset='utf-8')
+    meta(http-equiv='X-UA-Compatible', content='IE=edge')
+    meta(name='viewport', content='width=device-width, initial-scale=1')
+    meta(name='description', content='')
+    meta(name='author', content='templatemo')
+    link(href='stylesheets/font-awesome.min.css', rel='stylesheet')
+    link(href='stylesheets/bootstrap.css', rel='stylesheet')
+    link(href='stylesheets/templatemo-style.css', rel='stylesheet')
     link(rel='stylesheet', href='/stylesheets/style.css')
     block style
   body
     block content
-    script(src="/javascripts/zepto.js")
+    script(src="/javascripts/jquery.js")
+    // JS
+    script(type='text/javascript', src='/javascripts/jquery.js')
+    // jQuery
+    script(type='text/javascript', src='/javascripts/page.js')
+    // Templatemo Script
     block customScript

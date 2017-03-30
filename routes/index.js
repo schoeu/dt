@@ -5,11 +5,11 @@ var imgsRouter = require('../src/imgs/imgsRouter');
 
 /* GET home page. */
 router.get('/', function (req, res, next) {
-    res.render('index', {title: 'Express'});
+    res.render('index', {title: 'dt'});
 });
 
 // XML界面路由
-router.get('/xmlparse', xmlRouter.xmlRender.bind(this));
+router.get('/xmls', xmlRouter.xmlRender.bind(this));
 
 // XML解析接口
 router.post('/api/xmlparse', xmlRouter.xmlProcess.bind(this));
