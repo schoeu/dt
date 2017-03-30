@@ -3,6 +3,7 @@
  */
 
 var path = require('path');
+var pug = require('pug');
 var filed = require('node-filed');
 var xmlPro = require('xmlpro');
 var imgProcessor = require('./imgProcessor');
@@ -16,7 +17,17 @@ var tempDirName = '__cache';
  * @param {Object} res 响应对象
  * */
 function imgsRender(req, res) {
-    res.render('imgs', {title: ''});
+    var isPjax = req.headers['x-pjax'] === 'true';
+    // 判断是pjax请求则返回html片段
+    if (isPjax) {
+        var imgsHtml = pug.compileFile('imgs');
+        res.end(imgsHtml);
+    }
+    // 否则返回整个模板
+    else {
+        res.render('imgs', {title: ''});
+    }
+
 }
 
 /**

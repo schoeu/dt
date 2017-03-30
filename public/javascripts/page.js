@@ -1,7 +1,3 @@
-/*
- *	www.templatemo.com
- *******************************************************/
-
 /* HTML document is loaded. DOM is ready.
  -----------------------------------------*/
 $(document).ready(function(){
@@ -17,4 +13,6 @@ $(document).ready(function(){
             $(this).hide();
         });
     });
+
+    $(document).pjax('.templatemo-left-nav a', '.templatemo-content-container', {timeout: 1200});
 });
