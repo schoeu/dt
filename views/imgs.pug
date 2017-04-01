@@ -1,4 +1,4 @@
-extends layout
+extends index
 
 block style
     style.
@@ -8,19 +8,25 @@ block style
         }
 
 block content
-    form(action="/api/getimgs" method="post" class="imgsForm")
-        textarea(class="imgsArea" name="imgsBody" col=10 row=8)
-        div
-            p
-                input(class="imgsPath" name="imgsPath" placeholder="请输入图片节点")
-            p
-                input(class="imgsSize" name="imgsSize" placeholder="请输入图片裁剪尺寸")
-            p
-                input(class="imgsQ" name="imgsQ" placeholder="请输入图片质量" value=100)
-        div
-            button(class="imgsSubmit" type="submit") 提交
-            a(class="imgsdl" href="/api/imgsDownload") 下载
-    div.imgsInfoArea
+    .panel-heading.border-radius-10
+        h2 Image Tools
+        form(action="/api/getimgs" method="post" class="imgsForm")
+            textarea(class="imgsArea" name="imgsBody" col=10 row=8)
+            form(action="/api/getimgs" method="post" class="imgsForm")
+                .form-group
+                    label.col-sm-2.control-label(for='imgsPath') 图片路径
+                    .col-sm-10
+                        input#imgsPath.form-control.imgsPath(type='text', placeholder='item.display.url')
+                .form-group
+                    label.col-sm-2.control-label(for='imgsSize') 图片尺寸
+                    .col-sm-10
+                        input#imgsSize.form-control.imgsSize(type='text', placeholder='200,200')
+                .form-group
+                    .col-sm-offset-2.col-sm-10
+                        button.btn.btn-default.imgsSubmit(type='submit') 提交
+                        a(class="imgsdl" href="/api/imgsDownload") 下载
+
+        div.imgsInfoArea
 
 block customScript
     script.

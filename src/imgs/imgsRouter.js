@@ -20,14 +20,13 @@ function imgsRender(req, res) {
     var isPjax = req.headers['x-pjax'] === 'true';
     // 判断是pjax请求则返回html片段
     if (isPjax) {
-        var imgsHtml = pug.compileFile('imgs');
+        var imgsHtml = pug.renderFile(path.join(__dirname, '../..', 'views/imgsPjax.pug'), {title: ''});
         res.end(imgsHtml);
     }
     // 否则返回整个模板
     else {
         res.render('imgs', {title: ''});
     }
-
 }
 
 /**

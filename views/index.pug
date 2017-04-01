@@ -1,77 +1,12 @@
 extends layout
 
 block content
-  // Left column
-  .templatemo-flex-row
-    .templatemo-sidebar
-      header.templatemo-site-header
-        .square
-        h1 DATAT
-      .profile-photo-container
-        img.img-responsive(src='images/profile-photo.jpg', alt='Profile Photo')
-        .profile-photo-overlay
-      nav.templatemo-left-nav
-        ul
-          li
-            a.active(href='/')
-              i.fa.fa-home.fa-fw
-              | Dashboard
-          li
-            a(href='/xmls')
-              i.fa.fa-bar-chart.fa-fw
-              | XML
-          li
-            a(href='/imgs')
-              i.fa.fa-database.fa-fw
-              | 图片裁剪
-    // Main content
-    .templatemo-content.col-1.light-gray-bg
-      .templatemo-top-nav-container
-        .row
-          nav.templatemo-top-nav.col-lg-12.col-md-12
-            ul.text-uppercase
-              li
-                a.active(href='') Admin panel
-              li
-                a(href='') Dashboard
-              li
-                a(href='') Overview
-              li
-                a(href='login.html') Sign in form
-      .templatemo-content-container
-        .templatemo-content-widget.white-bg
-          h2.margin-bottom-10 Data Visualization
-          p
-            | Credit goes to
-            a(href='https://google-developers.appspot.com/chart/', target='_parent') Google Charts
-          .panel.panel-default.no-border
-            .panel-heading.border-radius-10
-              h2 Gauge
-            .panel-body
-              .templatemo-flex-row.flex-content-row.margin-bottom-30
-                .col-1
-                  #gauge_div.templatemo-chart
-                  h3.text-center.margin-bottom-5 Computer Resources
-                  p.text-center Curabitur
-          .panel.panel-default.no-border
-            .panel-heading.border-radius-10
-              h2 Timeline
-            .panel-body
-              .templatemo-flex-row.flex-content-row
-                .col-1
-                  #timeline_div.templatemo-chart
-                  h3.text-center.margin-bottom-5 Conference Schedule
-                  p.text-center Lorem Ipsum
-          .panel.panel-default.no-border
-            .panel-heading.border-radius-10
-              h2 Area Chart
-            .panel-body
-              .templatemo-flex-row.flex-content-row
-                .col-1
-                  #area_chart_div.templatemo-chart
-                  h3.text-center.margin-bottom-5 Company Performance
-                  p.text-center Fusce mi lacus
-        footer.text-right
-          p
-            | Copyright © schoeu
-            | | More Tools
+  .panel.panel-default.no-border
+    .panel-heading.border-radius-10
+      h2 Data Tools
+    .panel-body
+      .templatemo-flex-row.flex-content-row
+        .col-1
+          #timeline_div.templatemo-chart
+          h3.text-center.margin-bottom-5 Conference Schedule
+          p.text-center Lorem Ipsum

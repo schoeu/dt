@@ -14,5 +14,9 @@ $(document).ready(function(){
         });
     });
 
-    $(document).pjax('.templatemo-left-nav a', '.templatemo-content-container', {timeout: 1200});
+    $('.templatemo-left-nav a').on('click', function () {
+        $(this).addClass('active').siblings().removeClass('active');
+    });
+
+    $(document).pjax('.templatemo-left-nav a', '.templatemo-content-widget');
 });

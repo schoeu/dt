@@ -3,6 +3,8 @@
  */
 
 var xmlPro = require('xmlpro');
+var path = require('path');
+var pug = require('pug');
 var xmlDownload = require('./xmlDownload');
 
 var fileName = '';
@@ -14,7 +16,15 @@ var fileName = '';
  * @return {Object} res 响应对象
  * */
 function xmlRender(req, res) {
-    res.render('xml', {title: ''});
+    var isPjax = req.headers['x-pjax'] === 'true';
+    // 判断是pjax请求则返回html片段
+    if (isPjax) {
+        var xmlHtml = pug.renderFile(path.join(__dirname, '../..', 'views/xmlPjax.pug'), {title: ''});
+        res.end(xmlHtml);
+    }
+    else {
+        res.render('xml', {title: ''});
+    }
 }
 
 /**

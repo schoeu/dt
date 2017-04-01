@@ -1,0 +1,39 @@
+// extends layout
+
+block style
+    style.
+        .imgsArea{
+            width: 100%;
+            height: 400px;
+        }
+
+//block content
+form(action="/api/getimgs" method="post" class="imgsForm")
+    textarea(class="imgsArea" name="imgsBody" col=10 row=8)
+    div
+        p
+            input(class="imgsPath" name="imgsPath" placeholder="请输入图片节点")
+        p
+            input(class="imgsSize" name="imgsSize" placeholder="请输入图片裁剪尺寸")
+        p
+            input(class="imgsQ" name="imgsQ" placeholder="请输入图片质量" value=100)
+    div
+        button(class="imgsSubmit" type="submit") 提交
+        a(class="imgsdl" href="/api/imgsDownload") 下载
+div.imgsInfoArea
+
+//block customScript
+script.
+    var $form = $('.imgsForm');
+    var $info = $('.imgsInfoArea');
+    $form.on('submit', function (e) {
+        e.preventDefault();
+        $.ajax({
+            url: '/api/getimgs',
+            type: 'post',
+            data: $form.serialize()
+        }).done(function (d) {
+            !d.status && $info.append('<a href="api/download/' + d.path + '">下载打包文件</a>');
+        });
+    });
+
